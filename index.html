@@ -27,110 +27,48 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>Test Project</h3>
-		</div>
+			<h3>TODO Project</h3>
+		</div><br /><br />
 	</div><!-- end of row -->
 	<div class="row">
-		<div class="col-md-6">
-      <form id="form1" action="">
-
-			<div class="form-group">
-    		<label for="taskData">Название напоминания</label>
-    		<input type="text" class="form-control" id="taskData" aria-describedby="taskDataHelp" placeholder="Занятие">
-    		<small id="taskDataHelp" class="form-text text-muted">Введите название занятия на завтра.</small>
-  		</div>
-
-    <div class="form-group">
-      <label for="reminderData">Когда напомнить</label>
-			<div class="input-group">
-      <div onclick="showCalendar(event)" class="input-group-prepend">
-          <span class="input-group-text" id="calendarOpener"><i class="fa fa-calendar"></i></span>
-        </div>
-					<input readonly type="text" class="form-control" id="reminderData" aria-describedby="reminderDataHelp" placeholder="Напомнить">
-      </div>
-      <small id="reminderDataHelp" class="form-text text-muted">Введите дату и время напоминания.</small>
-		</div> <!-- end of form-group-->
-
-
-
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="Check1" value="some data">
-        <label class="form-check-label" for="exampleCheck1">Важно</label>
-      </div>
-
-      <button type="button" class="btn btn-primary" onclick="insertItemToList()" >Add task</button>
-      <button type="button" class="btn btn-light" onclick="emptyAllList()">Clear Form</button>
-      <!--button type="reset" class="btn btn-dark">Reset</button -->
-
-    </form>
+		<div class="col-md-4">
+			<div class="card" style="width: 100%; min-height: 400px;">
+				<div class="card-body">
+					<h5 class="card-title">TODO:</h5>
+					<hr color="blue">
+					<ul class="list-group" id="todo_list">
+					</ul>
+					<br />
+				</div>
+			</div>
 		</div><!-- end of col-md-6 -->
-		<div class="col-md-6">
-      <div class="card" style="width: 100%;">
-        <div class="card-body">
-          <h4 class="card-title">Список дел на ближайшее время:</h4>
-          <!-- p class="card-text">Завтра: <span id="tomDate"></span>.</p-->
-            <ul class="list-group" id="task_list">
-            </ul>
-          <br />
-          <a href="#" onclick="handleClearList()" class="btn btn-primary">Clear List</a>
-        </div>
-      </div>
+		<div class="col-md-4">
+		  <div class="card" style="width: 100%;min-height: 400px;">
+			<div class="card-body">
+			  <h5 class="card-title">In Progress:</h5>
+				<hr color="orange">
+				<ul class="list-group" id="progress_list">
+				</ul>
+				<br />
+			</div>
+		  </div>
+		</div><!-- end of col-md-6 -->
+		<div class="col-md-4">
+		  <div class="card" style="width: 100%;min-height: 400px;">
+			<div class="card-body">
+			  <h5 class="card-title">Done:</h5>
+				<hr color="green">
+				<ul class="list-group" id="done_list">
+				</ul>
+				<br />
+			</div>
+		  </div>
 		</div><!-- end of col-md-6 -->
 	</div> <!-- end of row -->
 </div>
 
-<div id="calendar" class="micalendar" style="display:none">
-  <div class="header_wrap">
-    <div class="header">
-      <p id="monthHeader">Month name</p>
-    </div>
-    <div class="arrows">
-      <div id="prevButton" class="arrows_left"><i class="fa fa-angle-left"></i></div>
-      <div id="nextButton" class="arrows_right"><i class="fa fa-angle-right"></i></div>
-    </div> <!-- END OF arrows -->
-  </div>
-  <table id="calendar_table">
-		<thead>
-	    <tr>
-	      <th>Пн</th>
-	      <th>Вт</th>
-	      <th>Ср</th>
-	      <th>Чт</th>
-	      <th>Пт</th>
-	      <th>Сб</th>
-	      <th>Вс</th>
-	    </tr>
-		</thead>
-		<tbody>
-		</tbody>
-  </table>
-	<hr><div class="btn-group">
-		<input type="button" onclick="hideCalendar(event)" value="Отмена" class="btn btn-sm btn-outline-secondary">
-	</div>
-</div> <!-- END OF CALENDAR -->
+
 <script>
-	buildCalendar(STATE.calendarMonth.getFullYear(), STATE.calendarMonth.getMonth());
-
-	document.body.addEventListener('click', function(event){
-		// console.log(document.getElementById('calendar').getBoundingClientRect());
-		if (!decideHide(event.target)) {
-    	hideCalendar(event);
-		}
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    initTaskContainer();
-  });
-	var calendarArrowLeft = document.getElementById('prevButton'); // получаем html элемент, который является дивом под иконкой стрелки "назад"
-	var calendarArrowRight = document.getElementById('nextButton');  // получаем html элемент, который является дивом под иконкой стрелки "вперед"
-  document.querySelector('.arrows_left,.arrows_right')
-	calendarArrowLeft.addEventListener('click', function(event) { // вешаем событие на html элемент
-    handleClickCalendarArrows(event);
-  });
-
-	calendarArrowRight.addEventListener('click', function(event){ // вешаем событие на html элемент
-    handleClickCalendarArrows(event);
-  });
 
 </script>
 </body>
