@@ -78,6 +78,7 @@ function printErrorHelper(id, msg, err = false) {
 function coreInsertLiToList(data, index, task = false) {
 
   var list = document.getElementById('task_list');
+  var list = document.getElementById('task_list');
   var newListNode = document.createElement('li');
   newListNode.classList.add('list-group-item');
   if (task) {

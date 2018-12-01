@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,6 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 <link rel="stylesheet" href="/css/micalendar.css">
+<link rel="stylesheet" href="/css/styles.css">
 <script type="text/javascript" src="/js/tasks.js"></script>
 <style>
 .delete_ico {
@@ -33,13 +35,13 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="card" style="width: 100%; min-height: 400px;">
-				<div class="card-body">
+				<div class="card-body" id="todo_list">
 					<h5 class="card-title">TODO:</h5>
 					<hr color="blue">
-					<ul class="list-group" id="todo_list">
-						<li class="list-group-item">Cras justo odio</li>
-						<li class="list-group-item">Cras justo odio</li>
-						<li class="list-group-item">Cras justo odio</li>
+					<ul class="list-group" data-id="todo">
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
 					</ul>
 					<br />
 				</div>
@@ -47,10 +49,10 @@
 		</div><!-- end of col-md-6 -->
 		<div class="col-md-4">
 		  <div class="card" style="width: 100%;min-height: 400px;">
-			<div class="card-body">
+			<div class="card-body" id="progress_list">
 			  <h5 class="card-title">In Progress:</h5>
 				<hr color="orange">
-				<ul class="list-group" id="progress_list">
+				<ul class="list-group" data-id="progress">
 				</ul>
 				<br />
 			</div>
@@ -58,10 +60,10 @@
 		</div><!-- end of col-md-6 -->
 		<div class="col-md-4">
 		  <div class="card" style="width: 100%;min-height: 400px;">
-			<div class="card-body">
+			<div class="card-body" id="done_list">
 			  <h5 class="card-title">Done:</h5>
 				<hr color="green">
-				<ul class="list-group" id="done_list">
+				<ul class="list-group" data-id="done">
 				</ul>
 				<br />
 			</div>
@@ -72,6 +74,49 @@
 
 
 <script>
+const todoList = document.getElementById('todo_list');
+const inProgressList = document.getElementById('progress_list');
+const doneList = document.getElementById('done_list');
+
+const dragEnter = (e) => {
+    console.log('This is ENTER: ', e);
+    e.preventDefault();
+    return null;
+}
+const dragOver = (e) => {
+    e.preventDefault();
+    return null;
+}
+const drop = (e) => {
+    e.preventDefault();
+    return null;
+}
+const dragStart = (e) => {
+    const el = e.target.parentNode.parentNode;
+    console.log('Parent: ', el.id);
+    e.dataTransfer.setData('test = ', el.id);
+}
+
+todoList.addEventListener("dragover", dragOver);
+inProgressList.addEventListener("dragover", dragOver);
+doneList.addEventListener("dragover", dragOver);
+
+todoList.addEventListener("dragenter", dragEnter);
+inProgressList.addEventListener("dragenter", dragEnter);
+doneList.addEventListener("dragenter", dragEnter);
+
+todoList.addEventListener("drop", drop);
+inProgressList.addEventListener("drop", drop);
+doneList.addEventListener("drop", drop);
+
+
+const dragableElements = document.querySelectorAll('.dnd_hand');
+
+for(const item of dragableElements) {
+    console.log(item);
+    item.addEventListener("dragstart", dragStart);
+}
+
 
 </script>
 </body>
