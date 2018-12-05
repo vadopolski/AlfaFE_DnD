@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-<link rel="stylesheet" href="/css/micalendar.css">
-<link rel="stylesheet" href="/css/styles.css">
-<script type="text/javascript" src="/js/tasks.js"></script>
+<link rel="stylesheet" href="css/micalendar.css">
+<link rel="stylesheet" href="css/styles.css">
+<script type="text/javascript" src="js/tasks.js"></script>
 <style>
 .delete_ico {
   position: absolute;
@@ -39,9 +39,9 @@
 					<h5 class="card-title">TODO:</h5>
 					<hr color="blue">
 					<ul class="list-group" data-id="todo">
-						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
-						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
-						<li draggable="true" class="list-group-item dnd_hand">Cras justo odio</li>
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo 1</li>
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo 2</li>
+						<li draggable="true" class="list-group-item dnd_hand">Cras justo 3</li>
 					</ul>
 					<br />
 				</div>
@@ -79,23 +79,31 @@ const inProgressList = document.getElementById('progress_list');
 const doneList = document.getElementById('done_list');
 
 const dragEnter = (e) => {
-    console.log('This is ENTER: ', e);
     e.preventDefault();
     return null;
-}
+};
 const dragOver = (e) => {
     e.preventDefault();
     return null;
-}
+};
 const drop = (e) => {
     e.preventDefault();
+    const parentId = e.dataTransfer.getData('test = ');
+    const transferedElementText = e.dataTransfer.getData('text');
+    const transferedElement = document.createElement('li');
+    transferedElement.setAttribute('class', 'list-group-item dnd_hand');
+    transferedElement.setAttribute('draggable', 'true');
+    transferedElement.innerHTML = transferedElementText;
+    e.target.childNodes[5].appendChild(transferedElement);
     return null;
-}
+};
 const dragStart = (e) => {
     const el = e.target.parentNode.parentNode;
-    console.log('Parent: ', el.id);
+    console.log('Drug start work: ', el.id);
     e.dataTransfer.setData('test = ', el.id);
-}
+    console.log("Put Transfer Element is ", e.target.innerHTML);
+    e.dataTransfer.setData('text', e.target.innerHTML);
+};
 
 todoList.addEventListener("dragover", dragOver);
 inProgressList.addEventListener("dragover", dragOver);
@@ -113,7 +121,7 @@ doneList.addEventListener("drop", drop);
 const dragableElements = document.querySelectorAll('.dnd_hand');
 
 for(const item of dragableElements) {
-    console.log(item);
+    console.log('Selector capture ' + item);
     item.addEventListener("dragstart", dragStart);
 }
 
