@@ -86,15 +86,23 @@ const dragOver = (e) => {
     e.preventDefault();
     return null;
 };
+
 const drop = (e) => {
     e.preventDefault();
     const parentId = e.dataTransfer.getData('test = ');
+    const parent = document.getElementById(parentId);
     const transferedElementText = e.dataTransfer.getData('text');
     const transferedElement = document.createElement('li');
-    transferedElement.setAttribute('class', 'list-group-item dnd_hand');
     transferedElement.setAttribute('draggable', 'true');
+    transferedElement.setAttribute('class', 'list-group-item dnd_hand');
     transferedElement.innerHTML = transferedElementText;
     e.target.childNodes[5].appendChild(transferedElement);
+    let childNodes = parent.childNodes[5].childNodes;
+    for (let i = 0; i < childNodes.length; i++) {
+        if (childNodes[i].innerHTML === transferedElementText) {
+            parent.childNodes[5].removeChild(childNodes[i]);
+        }
+    }
     return null;
 };
 const dragStart = (e) => {
@@ -117,14 +125,12 @@ todoList.addEventListener("drop", drop);
 inProgressList.addEventListener("drop", drop);
 doneList.addEventListener("drop", drop);
 
-
 const dragableElements = document.querySelectorAll('.dnd_hand');
 
 for(const item of dragableElements) {
     console.log('Selector capture ' + item);
     item.addEventListener("dragstart", dragStart);
 }
-
 
 </script>
 </body>
