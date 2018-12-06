@@ -107,9 +107,7 @@ const drop = (e) => {
 };
 const dragStart = (e) => {
     const el = e.target.parentNode.parentNode;
-    console.log('Drug start work: ', el.id);
     e.dataTransfer.setData('test = ', el.id);
-    console.log("Put Transfer Element is ", e.target.innerHTML);
     e.dataTransfer.setData('text', e.target.innerHTML);
 };
 
